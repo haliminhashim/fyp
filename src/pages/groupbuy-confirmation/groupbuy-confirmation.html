@@ -1,0 +1,203 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title text-center>Checkout</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only>
+          <ion-icon name="" color="secondary"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h6 padding-left>Item Summary:</h6>
+        </ion-col>
+      </ion-row>
+      <ion-row class="checkout-content">
+        <ion-col>
+          <ion-card *ngIf="product != null">
+            <ion-row>
+              <ion-col col-4>
+                <img src={{product.image}} />
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  {{product.name}}
+                  <ion-row *ngFor="let option of product.option">
+                    {{option.title}}: {{option.selected}}
+                  </ion-row>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-3>
+                      <button block small ion-button icon-only (click)="decreaseQuantity()">
+                        <ion-icon name="arrow-dropdown" color="secondary"></ion-icon>
+                      </button>
+                    </ion-col>
+                    <ion-col>
+                      <button ion-button small outline block color="primary">{{quantity}}</button>
+                    </ion-col>
+                    <ion-col col-3>
+                      <button block small ion-button icon-only (click)="increaseQuantity()">
+                        <ion-icon name="arrow-dropup" color="secondary"></ion-icon>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                <ion-row>
+                  Price per unit: $ {{product.price | number:'1.2-2'}}
+                </ion-row>
+                  {{inviteCode}}
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h6 padding-left>Shipping Address:</h6>
+        </ion-col>
+        <ion-col col-3 padding-right text-right>
+          <span end (click)="changeShippingAddress()">Change</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="checkout-content">
+        <ion-col>
+          <ion-card>
+            <ion-card-content *ngIf="shippingAddress.id == null">
+              No Shipping Address Selected
+            </ion-card-content>
+            <ion-card-content *ngIf="shippingAddress.id != null">
+              <ion-row>
+                {{shippingAddress.fullName}}
+              </ion-row>
+              <ion-row>
+                {{shippingAddress.streetAddress1}},
+                {{shippingAddress.streetAddress2}}
+              </ion-row>
+              <ion-row>
+                {{shippingAddress.city}},
+                {{shippingAddress.state}}
+              </ion-row>
+              <ion-row>
+                {{shippingAddress.country}}
+                {{shippingAddress.zipCode}}
+              </ion-row>
+              <ion-row>
+                {{shippingAddress.phoneNumber}}
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h6 padding-left>Billing Address:</h6>
+        </ion-col>
+        <ion-col col-3 padding-right text-right>
+          <span end (click)="changeBillingAddress()">Change</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="checkout-content">
+        <ion-col>
+          <ion-card>
+            <ion-card-content *ngIf="billingAddress.id == null">
+              No Billing Address Selected
+            </ion-card-content>
+            <ion-card-content *ngIf="billingAddress.id != null">
+              <ion-row>
+                {{billingAddress.fullName}}
+              </ion-row>
+              <ion-row>
+                {{billingAddress.streetAddress1}},
+                {{billingAddress.streetAddress2}}
+              </ion-row>
+              <ion-row>
+                {{billingAddress.city}},
+                {{billingAddress.state}}
+              </ion-row>
+              <ion-row>
+                {{billingAddress.country}}
+                {{billingAddress.zipCode}}
+              </ion-row>
+              <ion-row>
+                {{billingAddress.phoneNumber}}
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h6 padding-left>Delivery Option:</h6>
+        </ion-col>
+      </ion-row>
+      <ion-row class="checkout-content">
+        <ion-col>
+          <ion-list padding-left padding-right radio-group [(ngModel)]="delivery">
+            <div *ngFor="let option of deliveryOption; let i = index">
+              <ion-item>
+                <ion-label>{{option.name}}</ion-label>
+                <ion-radio value={{i}} (click)="calculateTotal()"></ion-radio>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h6 padding-left>Payment Method</h6>
+        </ion-col>
+      </ion-row>
+      <ion-row class="checkout-content">
+        <ion-col>
+          <ion-list padding-left padding-right radio-group [(ngModel)]="payment">
+            <ion-item>
+              <ion-label>Paypal</ion-label>
+              <ion-radio value="paypal"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>uTrust</ion-label>
+              <ion-radio value="utrust"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
+  <ion-footer padding>
+    <h4>Summary</h4>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          Sub Total
+        </ion-col>
+        <ion-col>
+          $ {{(subTotalAmnt * quantity) | number:'1.2-2'}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Shipping
+        </ion-col>
+        <ion-col>
+          $ {{shippingAmnt | number:'1.2-2'}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h5>Total</h5>
+        </ion-col>
+        <ion-col>
+          <h5>$ {{totalAmnt | number:'1.2-2'}}</h5>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item>
+      <ion-label stacked>Invite Code</ion-label>
+      <ion-input type="text" [(ngModel)]="inviteCode"></ion-input>
+    </ion-item>
+    <button ion-button block (click)="create()">Place Order</button>
+  </ion-footer>

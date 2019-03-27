@@ -1,0 +1,38 @@
+{
+  "users": [{
+    "name": "admin",
+    "keys": {
+      "publicKey": "2qp4QFkyuRRFo8bseGFby1fEew81ztpigLWFdGswq2cK",
+      "privateKey": "8wbua1RpsFiwyzdHYRsHVRPVqA5AWs9cambZJt5Zuhqc"
+    }
+  },{
+    "name": "user1",
+    "keys": {
+        "publicKey": "BPcvGEeG5u8U2RPNww2X5QhMnJRQ7vX2JqD7yY55PQyY",
+        "privateKey": "6t9DK7eb2azS62skzG7WttK4LErBZNwobRMWmBTHUrVv" }
+  }
+  ,{
+    "name": "user2",
+    "keys": {
+        "publicKey": "632DbV3U3SBsUstX6Kz8LLvQiyQcJyJg14MWUgoGyLbW",
+        "privateKey": "8wbua1RpsFiwyzdHYRsHVRPVqA5AWs9cambZJt5Zuhqc" }
+  }
+  ,{
+    "name": "user3",
+    "keys": {
+        "publicKey": "Hi5fjz8WSqPRChd9sPwX7wD8ZWV61M7VUSG3yiwyYigH",
+        "privateKey": "GUQ6Vs8fHc1FBzneBJTigtiu3bHnSFQu4jnzLD22DWBn" }
+  }
+  ,{
+    "name": "user4",
+    "keys": {
+        "publicKey": "2FJD3AkByhtggmJ9TGV2QtPKWhtiyxa11NnHWnnmaVpd",
+        "privateKey": "FNYzwQMXicaN38H2YBVaMWMAXSHaqTZmYJuF7tq9zyKq" }
+  }
+  ,{
+    "name": "user5",
+    "keys": {
+        "publicKey": "2Sat8zgBYuTc1QASdWRua3MWaSiPRbvrAnKPFnk7KB7x",
+        "privateKey": "J3MmbdBCmoTwgrBdigmmhteq1B4YATVwKxorrVCRQbWy" }
+  }]
+}

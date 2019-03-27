@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title text-center>Checkout</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only>
+          <ion-icon name="" color="secondary"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding margin-top>
+  <ion-row>
+    <ion-col>
+      <button block ion-button (click)="createAddress()">Add Address</button>
+    </ion-col>
+  </ion-row>
+  <ion-list radio-group [(ngModel)]="selectedAddress">
+    <ion-card padding *ngFor="let item of addresses; let i = index">
+      <ion-radio value={{item.id}}></ion-radio>
+      <ion-card-header>
+        <h1>{{item.fullName}}</h1>
+      </ion-card-header>
+      <ion-card-content>
+        <div>{{item.streetAddress1}}</div>
+        <div>{{item.streetAddress2}}</div>
+        <div>{{item.city}}, {{item.state}} {{item.zipCode}}</div>
+        <div>{{item.country}}</div>
+        <div>Phone Number: {{item.phoneNumber}}</div>
+      </ion-card-content>
+      <button ion-button outline block color="light" (click)="viewAddress(item)">Edit</button>
+    </ion-card>
+  </ion-list>
+  <ion-row>
+    <ion-col>
+      <button ion-button block (click)="closeModal();">Continue</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-searchbar placeholder="Search"></ion-searchbar>
+    <ion-buttons right (click)="viewCart()">
+      <button ion-button icon-only>
+        <ion-icon name="cart" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-slides>
+      <ion-slide>
+        <img src="https://pixabay.com/get/e83db60a2ffd013ed1534705fb0938c9bd22ffd41cb412459df2c47ba7/black-friday-1875790_1920.png" />
+      </ion-slide>
+      <ion-slide>
+        <img src="https://pixabay.com/get/e83db60721f0043ed1534705fb0938c9bd22ffd41cb412459df2c478a1/black-friday-1878945_1920.png" />
+      </ion-slide>
+    </ion-slides>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col padding-left>
+        <h5>Daily Deals</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row nowrap class="horizontal-scroll">
+      <ion-col col-5 *ngFor="let item of daily">
+        <ion-card (click)="viewProduct(item.id);">
+          <img src={{item.image}} />
+          <ion-card-content color="dark">
+            <ion-row>
+              <ion-col class="product-name">
+                {{item.name}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                $ {{item.price | number:'1.2-2'}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <img src="https://pixabay.com/get/e83db80729f5053ed1534705fb0938c9bd22ffd41cb412459df2c570a4/black-friday-1898114_1920.jpg" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left>
+        <h5>Recommended</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row class="vertical-scroll">
+      <ion-col col-6 *ngFor="let item of products">
+        <ion-card (click)="viewProduct(item.id);">
+          <img src={{item.image}} />
+          <ion-card-content color="dark">
+            <ion-row>
+              <ion-col class="product-name">
+                {{item.name}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                $ {{item.price | number:'1.2-2'}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-row>
+  </ion-grid>
+</ion-content>

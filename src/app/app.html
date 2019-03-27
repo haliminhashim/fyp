@@ -1,0 +1,77 @@
+<ion-menu [content]="mycontent">
+
+  <ion-header>
+
+    <ion-toolbar text-center color="primary">
+      <ion-title>Trollee</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only menuClose>
+          <ion-icon name="close" color="secondary"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-buttons left>
+        <button class="createUser" ion-button icon-only>
+          <ion-icon name="" color="secondary"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngIf="user.id > 0" style="font-size: 1.2em">Hi, {{user.firstname}}</ion-col>
+        <ion-col *ngIf="user.id <= 0">Hi, Guest</ion-col>
+
+        <ion-col *ngIf="user.id > 0" col-3 text-center (click)="logout()" menuClose> 
+          <div>Logout</div>
+        </ion-col>
+        <ion-col *ngIf="user.id <= 0" col-3 text-center (click)="login()" menuClose>
+          Login
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 text-center class="nav-fast-dial" (click)="viewOrder()" menuClose>
+          <ion-icon name="md-list" color="primary"></ion-icon>
+          <div class="nav-fast-dial-text">Orders</div>
+        </ion-col>
+        <ion-col col-3 text-center class="nav-fast-dial" (click)="viewAccount()" menuClose>
+          <ion-icon name="person" color="primary"></ion-icon>
+          <div class="nav-fast-dial-text">Account</div>
+        </ion-col>
+        <ion-col col-3 text-center class="nav-fast-dial" (click)="viewCart()" menuClose>
+          <ion-icon name="cart" color="primary"></ion-icon>
+          <div class="nav-fast-dial-text">Cart</div>
+        </ion-col>
+        <ion-col col-3 text-center class="nav-fast-dial" (click)="viewGroupBuy()" menuClose>
+          <ion-icon name="people" color="primary"></ion-icon>
+          <div class="nav-fast-dial-text">Group Buy</div>
+        </ion-col>
+        <ion-col col-3 text-center class="nav-fast-dial" menuClose>
+          <ion-icon name="help-circle" color="primary"></ion-icon>
+          <div class="nav-fast-dial-text">Help</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list-header no-lines color="primary" class="menu-categories">
+      <h2>Categories</h2>
+    </ion-list-header>
+
+  </ion-header>
+
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <div *ngFor="let category of categories">
+              <button (click)="viewCategory(category)" menuClose ion-item>
+                {{category.name}}
+              </button>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #mycontent swipeBackEnabled="false"></ion-nav>

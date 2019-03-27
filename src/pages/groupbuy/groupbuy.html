@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-searchbar placeholder="Search"></ion-searchbar>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="viewCart()">
+        <ion-icon name="cart" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <img src="{{ product.image }}" />
+          <ion-card-header>
+            {{ product.make }}
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ product.name }}</p>
+            <p>$ {{ product.price  | number:'1.2-2'}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <h5>Selected Options:</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let option of product.option">
+            <ion-col>
+              {{option.title}}
+            </ion-col>
+            <ion-col *ngIf="option.selected != ''">
+              {{option.selected}}
+            </ion-col>
+            <ion-col *ngIf="option.selected == ''">
+              None
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Invite Code</ion-label>
+                <ion-input type="text" [(ngModel)]="inviteCode" style="border: solid thin black"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button block (click)="joinGroupBuy()">Join</button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Level
+      </ion-col>
+      <ion-col>
+        Referrals
+      </ion-col>
+      <ion-col>
+        Discount($)
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let tier of tiers" padding-left>
+      <ion-col>
+        {{tier.level}}
+      </ion-col>
+      <ion-col>
+        {{tier.amount}}
+      </ion-col>
+      <ion-col>
+        {{tier.discount}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left>
+        <h5>Specification</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left padding-right>
+        <ion-row class="spec-item" *ngFor="let item of product.spec">
+          <ion-col>{{ item.type }}</ion-col>
+          <ion-col>{{ item.value }}</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

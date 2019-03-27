@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left (click)="closeModal();">
+      <button ion-button icon-only>
+        <ion-icon name="arrow-back" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{order.ref}}</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row color="primary">
+          <ion-col>#{{order.id}}</ion-col>
+          <ion-col text-right>{{order.status}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row>Sub Total: {{order.productTotal | number:'1.2-2'}}</ion-row>
+            <ion-row>Shipping Total: {{order.shippingTotal | number:'1.2-2'}}</ion-row>
+            <ion-row>Grand Total: {{order.productTotal + order.shippingTotal | number:'1.2-2'}}</ion-row>
+            <ion-row></ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let product of order.products">
+          <ion-col col-3>
+            <img src={{product.image}}>
+          </ion-col>
+          <ion-col>
+            <ion-row>{{product.name}}</ion-row>
+            <ion-row>Quantity: {{product.quantity}}</ion-row>
+            <ion-row>$ {{product.price | number:'1.2-2'}}</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row text-right>
+          <ion-col>
+            {{order.date}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <button ion-button block color="light">Tracking</button>
+            <button ion-button block *ngIf="order.status != 'Delivered'">Confirm Delivery</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

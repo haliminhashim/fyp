@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center>Trollee</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col>
+        <h3>Personal Information</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="account">
+          <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="!account.controls.email.valid && PersonalInfoSubmitAttempt">
+            Email field is required
+          </div>
+          <ion-item>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input formControlName="firstname" type="text"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="!account.controls.firstname.valid && PersonalInfoSubmitAttempt">
+            First Name field is required
+          </div>
+          <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input formControlName="lastname" type="text"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="!account.controls.lastname.valid && PersonalInfoSubmitAttempt">
+            Last Name field is required
+          </div>
+          <ion-item>
+            <ion-label stacked>Date of Birth</ion-label>
+            <ion-datetime formControlName="dob" displayFormat="DD/MM/YYYY" value=account.dob></ion-datetime>
+          </ion-item>
+          <div class="error-message" *ngIf="!account.controls.dob.valid && PersonalInfoSubmitAttempt">
+            Date of Birth field is required
+          </div>
+          <ion-item>
+            <ion-label stacked>Gender</ion-label>
+            <ion-select formControlName=gender>
+              <ion-option value="Male">Male</ion-option>
+              <ion-option value="Female">Female</ion-option>
+            </ion-select>
+          </ion-item>
+          <div class="error-message" *ngIf="!account.controls.gender.valid && PersonalInfoSubmitAttempt">
+            Gender field is required
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="dark" (click)="updatePersonalInformation()">Save Changes</button>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center padding-top>
+      <ion-col>
+        <h3>Security Information</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label stacked>Current Password</ion-label>
+          <ion-input [(ngModel)]="curpassword" type="password"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="!currentPasswordValid  && PasswordSubmitAttempt">
+          The Current Password Provided Does Not Match
+        </div>
+        <ion-item>
+          <ion-label stacked>New Password</ion-label>
+          <ion-input [(ngModel)]="newpassword" type="password"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="!newPasswordNotEmpty && PasswordSubmitAttempt">
+          The New Password Provided Can't be Empty
+        </div>
+        <ion-item>
+          <ion-label stacked> Confirm Password</ion-label>
+          <ion-input [(ngModel)]="conpassword" type="password"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="!newPasswordValid  && PasswordSubmitAttempt">
+          The New Password Provided Does Not Match
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="dark" (click)="updatePassword()">Update Password</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

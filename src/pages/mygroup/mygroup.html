@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-searchbar placeholder="Search"></ion-searchbar>
+      <ion-buttons right (click)="viewCart()">
+        <button ion-button icon-only>
+          <ion-icon name="cart" color="secondary"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+  <div>
+    <ion-card *ngIf="transactions.length == 0"> 
+      <ion-row>
+        <ion-col>
+            You have no Group Buy Participation
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  <ion-card *ngFor="let item of transactions">
+    <ion-row>
+      <ion-col col-4 *ngIf="item.product.image">
+        <img src={{item.product.image}} />
+      </ion-col>
+      <ion-col col-8>
+        <ion-row>
+          Invite Code: {{item.data.inviteCode}}
+        </ion-row>
+        <ion-row>
+          <span>{{item.product.name}}</span>
+          <span *ngFor="let option of item.product.option">
+            , {{option.selected}}
+          </span>
+        </ion-row>
+        <ion-row>
+          Quantity: {{item.data.quantity}}
+        </ion-row>
+        <ion-row>
+          Referrals: {{item.data.referrals.length}}
+        </ion-row>
+        <ion-row>
+          Original Price: $ {{item.product.price | number:'1.2-2'}}
+        </ion-row>
+        <ion-row>
+          Discount: $ {{item.discount | number:'1.2-2'}}
+        </ion-row>
+        <ion-row>
+          Attained Price: $ {{item.product.price - item.discount | number:'1.2-2'}}
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            Level
+          </ion-col>
+          <ion-col>
+            Referrals
+          </ion-col>
+          <ion-col>
+            Discount($)
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let tier of item.tiers">
+          <ion-col>
+            {{tier.level}}
+          </ion-col>
+          <ion-col>
+            {{tier.amount}}
+          </ion-col>
+          <ion-col>
+            {{tier.discount}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

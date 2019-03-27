@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left (click)="closeModal();">
+      <button ion-button icon-only>
+        <ion-icon name="arrow-back" color="secondary"></ion-icon>
+        Back
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Options</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only>
+        <ion-icon name="" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list radio-group *ngFor="let option of product.option" [(ngModel)]=option.selected>
+    <ion-list-header>
+      {{option.title}}
+    </ion-list-header>
+    <ion-item *ngFor="let type of option.type">
+      <ion-label>{{type.value}}</ion-label>
+      <ion-radio value={{type.value}}></ion-radio>
+    </ion-item>
+  </ion-list>
+  <button margin-top ion-button color="dark" block (click)="closeModal();">Continue</button>
+</ion-content>

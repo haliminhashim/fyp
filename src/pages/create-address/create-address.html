@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left (click)="closeModal();">
+      <button ion-button icon-only>
+        <ion-icon name="arrow-back" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Add an Address</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="address">
+    <ion-item>
+      <ion-label stacked>Full Name</ion-label>
+      <ion-input formControlName="fullName" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.fullName.valid && submitAttempt">
+      <li>Full Name field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>Street Address 1</ion-label>
+      <ion-input formControlName="streetAddress1" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.streetAddress1.valid && submitAttempt">
+      <li>Street Address 1 field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>Street Address 2</ion-label>
+      <ion-input formControlName="streetAddress2" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.streetAddress2.valid && submitAttempt">
+      <li>Street Address 2 field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>City</ion-label>
+      <ion-input formControlName="city" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.city.valid && submitAttempt">
+      <li>City field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>State</ion-label>
+      <ion-input formControlName="state" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.state.valid && submitAttempt">
+      <li>State field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>Country</ion-label>
+      <ion-input formControlName="country" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.country.valid && submitAttempt">
+      <li>Country field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>Zip Code</ion-label>
+      <ion-input formControlName="zipCode" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.zipCode.valid && submitAttempt">
+      <li>Zip Code field is required</li>
+    </div>
+    <ion-item>
+      <ion-label stacked>Phone Number</ion-label>
+      <ion-input formControlName="phoneNumber" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message" *ngIf="!address.controls.phoneNumber.valid && submitAttempt">
+      <li>Phone Number field is required</li>
+    </div>
+  </form>
+
+  <button ion-button block color="dark" (click)="save();">Add Address</button>
+</ion-content>

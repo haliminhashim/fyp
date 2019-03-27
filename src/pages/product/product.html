@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-searchbar placeholder="Search"></ion-searchbar>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="viewCart()">
+        <ion-icon name="cart" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <img src="{{ product.image }}" />
+          <ion-card-header>
+            {{ product.make }}
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ product.name }}</p>
+            <p>$ {{ product.price | number:'1.2-2'}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button outline block icon-end (click)="optionModal(product)">
+                Options
+                <ion-icon name="arrow-dropright"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h5>Selected Options:</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let option of product.option">
+            <ion-col>
+              {{option.title}}
+            </ion-col>
+            <ion-col *ngIf="option.selected != ''">
+              {{option.selected}}
+            </ion-col>
+            <ion-col *ngIf="option.selected == ''">
+              None
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button block>Buy Now</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block color="light" (click)="addToCart(product)" >Add to Cart</button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left>
+        <h5>Related Products</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row nowrap class="horizontal-scroll">
+      <ion-col padding-left class="card-scroll" col-5 *ngFor="let item of related">
+        <ion-card (click)="viewProduct(item.id);">
+          <img src={{item.image}} />
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="product-name">
+                  {{item.name}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                $ {{item.price | number:'1.2-2'}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left >
+        <h5>Specification</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left padding-right>
+        <ion-row class="spec-item" *ngFor="let item of product.spec">
+          <ion-col>{{ item.type }}</ion-col>
+          <ion-col>{{ item.value }}</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding-left>
+        <h5>From Same Seller</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row nowrap class="horizontal-scroll">
+      <ion-col padding-left class="card-scroll" col-5 *ngFor="let item of sameseller">
+        <ion-card (click)="viewProduct(item.productid);">
+          <img src={{item.image}} />
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="product-name">
+                  {{item.name}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                $ {{item.price | number:'1.2-2'}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

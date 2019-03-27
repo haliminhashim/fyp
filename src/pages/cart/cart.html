@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center>Your Trollee</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding *ngIf="cart.length != 0">
+  <ion-grid>
+    <ion-card *ngFor="let item of cart; let i = index">
+      <ion-row>
+        <ion-col>
+          <ion-checkbox [(ngModel)]="item.product.confirm"></ion-checkbox>
+          {{item.product.make}}
+        </ion-col>
+        <ion-col col-1>
+          <ion-icon float-right name="trash" right (click)="removeFromCart(item.id)"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <img src={{item.product.image}} />
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            {{item.product.name}}
+          </ion-row>
+          <ion-row *ngFor="let option of item.product.option">
+            {{option.title}}: {{option.selected}}
+          </ion-row>
+          <ion-row>
+            $ {{item.product.price | number:'1.2-2'}}
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button block small icon-end ion-button (click)="editOption(item.product)">
+                Options
+                <ion-icon name="arrow-dropdown" color="secondary"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>
+              <button block small ion-button icon-only (click)="decreaseQuantity(i)">
+                <ion-icon name="arrow-dropdown" color="secondary"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button small outline block color="primary"
+                (click)="viewAddress(item)">{{item.product.quantity}}</button>
+            </ion-col>
+            <ion-col col-3>
+              <button block small ion-button icon-only (click)="increaseQuantity(i)">
+                <ion-icon name="arrow-dropup" color="secondary"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="cart.length == 0">
+  <ion-card>
+    <ion-card-content text-center padding>
+      No item in cart
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer padding *ngIf="cart.length != 0">
+  <h4>Summary</h4>
+  <ion-grid>
+    <ion-row padding-top>
+      <ion-col>
+        <h5>Total</h5>
+      </ion-col>
+      <ion-col>
+        <h5>$ {{total | number:'1.2-2'}}</h5>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <button ion-button block (click)="checkout(cart);">Go To Checkout</button>
+</ion-footer>

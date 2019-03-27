@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center>Your Orders</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="orders.length == 0">
+    <ion-card>
+      <ion-card-content text-center padding>
+        No existing Order
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+<ion-content padding *ngIf="orders.length != 0">
+  <ion-card *ngFor="let order of orders">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row color="primary">
+          <ion-col>#{{order.id}}</ion-col>
+          <ion-col text-right>{{order.status}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <img src={{order.products[0].image}}>
+          </ion-col>
+          <ion-col>
+            <ion-row>{{order.products[0].name}}</ion-row>
+            <ion-row>Quantity: {{order.products[0].quantity}}</ion-row>
+            <ion-row>$ {{order.products[0].price | number:'1.2-2'}}</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row text-right>
+          <ion-col>
+            {{order.date}}
+          </ion-col>
+        </ion-row>
+        <ion-row text-center *ngIf="order.products.length == 1">
+          <ion-col>
+            <button ion-button block color="light" outline (click)="viewOrderDetails(order)">View Order Details</button>
+          </ion-col>
+        </ion-row>
+        <ion-row text-center *ngIf="order.products.length > 1">
+          <ion-col>
+            <button ion-button block color="light" outline (click)="viewOrderDetails(order)">View Other Items</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

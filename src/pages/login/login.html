@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar hideBackButton color="primary">
+    <ion-title text-center>Trollee</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid margin-top>
+    <ion-row text-center>
+      <ion-col>
+        <h3>Sign in to your account</h3>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="loginForm">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="loginForm.controls.email.errors && submitAttempt">
+            <li *ngIf="loginForm.controls.email.errors.email">
+              Invalid Email Address
+            </li>
+            <li *ngIf="loginForm.controls.email.errors.required">
+              Email field is required
+            </li>
+          </div>
+          <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="loginForm.controls.email.errors && submitAttempt">
+            <li>Password field is required</li>
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="login();">Login</button>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        Don't have an account?
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="dark" (click)="gotoSignup();">Create an account</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

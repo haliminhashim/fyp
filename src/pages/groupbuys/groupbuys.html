@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-searchbar placeholder="Search"></ion-searchbar>
+    <ion-buttons right (click)="viewCart()">
+      <button ion-button icon-only>
+        <ion-icon name="cart" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-buttons (click)="viewMyGroup()">
+    <button block ion-button>
+      View Group
+    </button>
+  </ion-buttons>
+  <ion-grid>
+    <ion-row>
+      <h5 padding-left>Group Buy</h5>
+    </ion-row>
+    <ion-card *ngFor="let item of transactions; let i = index">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <img src={{item.data.product.image}} />
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              {{item.data.product.name}}
+            </ion-row>
+            <ion-row *ngFor="let option of item.data.product.option">
+              {{option.title}}: {{option.selected}}
+            </ion-row>
+            <ion-row>
+              $ {{item.data.product.price | number:'1.2-2'}}
+            </ion-row>
+            <ion-row>
+              {{item.data.count}}/{{item.data.quantity}} Purchased
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <button block small icon-end ion-button (click)="viewGroupBuy(item)">
+                  View Group Buy
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-grid>
+</ion-content>

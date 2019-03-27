@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar hideBackButton color="primary">
+    <ion-buttons right (click)="closeModal();">
+      <button ion-button icon-only>
+        <ion-icon name="close" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Edit Address</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only>
+        <ion-icon name="" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label stacked>Full Name</ion-label>
+          <ion-input [(ngModel)]="address.fullName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Street Address 1</ion-label>
+          <ion-input [(ngModel)]="address.streetAddress1"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Street Address 2</ion-label>
+          <ion-input [(ngModel)]="address.streetAddress2"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>City</ion-label>
+          <ion-input [(ngModel)]="address.city"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>State</ion-label>
+          <ion-input [(ngModel)]="address.state"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Zip Code</ion-label>
+          <ion-input [(ngModel)]="address.zipCode"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Country</ion-label>
+          <ion-input [(ngModel)]="address.country"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Phone Number</ion-label>
+          <ion-input [(ngModel)]="address.phoneNumber"></ion-input>
+        </ion-item>
+        <button margin-top ion-button block (click)="gotoSave();">Save Changes</button>
+        <button margin-top ion-button color="dark" block (click)="closeModal();">Cancel</button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
